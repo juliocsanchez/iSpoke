@@ -76,11 +76,33 @@ class MainActivity : ComponentActivity() {
                             imageResId = backStackEntry.arguments?.getInt("imageResId") ?: 0
                         )
                     }
+                    composable(
+                        route = "gesture/{letter}/{imageResId}/{title}",
+                        arguments = listOf(
+                            navArgument("letter"){type = NavType.StringType},
+                            navArgument("imageResId") { type = NavType.IntType },
+                            navArgument("title") { type = NavType.StringType }
+                        )
+                    ){ backStackEntry ->
+                        Gesture(
+                            navController = navController,
+                            imageResId = backStackEntry.arguments?.getInt("imageResId") ?: 0,
+                            title =  backStackEntry.arguments?.getString("title") ?: "",
+                            letter = backStackEntry.arguments?.getString("letter") ?: "")
+                    }
+                    composable(
+                        route = "practice"
+                    ) {
+                        Practice(
+                            navController = navController
+                        )
+                    }
                 }
             }
         }
     }
 }
+
 
 @Composable
 fun MyScreen(navController: NavHostController) {
@@ -160,7 +182,7 @@ fun MyScreen(navController: NavHostController) {
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         // Ícone 1
-                        IconButton(onClick = { /* Voltar para Home */ }) {
+                        IconButton(onClick = { navController.navigate("home") }) {
                             Icon(
                                 imageVector = Icons.Default.Home,
                                 contentDescription = "Home"
@@ -168,7 +190,9 @@ fun MyScreen(navController: NavHostController) {
                         }
 
                         // Ícone 2
-                        IconButton(onClick = { /* Ir para Chat */ }) {
+                        IconButton(onClick = {
+                            navController.navigate("practice")
+                        }) {
                             Icon(
                                 imageVector = Icons.Default.Forum,
                                 contentDescription = "Configurações"
@@ -176,7 +200,7 @@ fun MyScreen(navController: NavHostController) {
                         }
 
                         // Ícone 3
-                        IconButton(onClick = { /* Ir para Perfil*/  }) {
+                        IconButton(onClick = { /* Ir pnavControllerara Perfil*/  }) {
                             Icon(
                                 imageVector = Icons.Default.Person,
                                 contentDescription = "Perfil"
