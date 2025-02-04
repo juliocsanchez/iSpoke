@@ -4,6 +4,7 @@ package com.example.ispoke.android
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
+import android.util.Log
 import android.widget.Space
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -47,6 +48,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
+import java.net.URLEncoder
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -169,7 +171,13 @@ fun Gesture(navController: NavController, letter: String,imageResId : Int, title
                             context,
                             android.Manifest.permission.CAMERA
                         ) == PackageManager.PERMISSION_GRANTED -> {
-                            navController.navigate("practice")
+                            try {
+                                // Codifica o título para URL
+                                val encodedTitle = URLEncoder.encode(letter, "UTF-8")
+                                navController.navigate("practice/$encodedTitle")
+                            } catch (e: Exception) {
+                                Log.e("Navigation", "Erro na navegação", e)
+                            }
                         }
                         else -> cameraPermissionLauncher.launch(android.Manifest.permission.CAMERA)
                     }

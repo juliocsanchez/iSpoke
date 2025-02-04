@@ -96,10 +96,12 @@ class MainActivity : ComponentActivity() {
                             letter = backStackEntry.arguments?.getString("letter") ?: "")
                     }
                     composable(
-                        route = "practice"
+                        route = "practice/{gestureName}",
+                        arguments = listOf(navArgument("gestureName") { type = NavType.StringType })
                     ) {backStackEntry ->
                         Practice(
                             navController = navController,
+                            gestureName = backStackEntry.arguments?.getString("gestureName") ?: ""
                             )
                     }
                 }
