@@ -1,6 +1,8 @@
 package com.example.ispoke.android
 
+import Practice
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -34,6 +36,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -48,7 +51,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,12 +60,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyApplicationTheme {
                 val navController = rememberNavController()
+                val sharedViewModel : SharedViewModel = viewModel()
                 NavHost(
                     navController = navController,
                     startDestination = "home"
                 ) {
                     composable("home") {
-                        MyScreen(navController)
+                        MyScreen(navController, sharedViewModel)
                     }
                     composable(
                         route = "module/{title}/{imageResId}",
@@ -92,10 +97,10 @@ class MainActivity : ComponentActivity() {
                     }
                     composable(
                         route = "practice"
-                    ) {
+                    ) {backStackEntry ->
                         Practice(
-                            navController = navController
-                        )
+                            navController = navController,
+                            )
                     }
                 }
             }
@@ -103,9 +108,12 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+open class SharedViewModel : ViewModel() {
+    open var modules: List<ModuleItem> = emptyList()
+}
 
 @Composable
-fun MyScreen(navController: NavHostController) {
+fun MyScreen(navController: NavHostController, sharedViewModel: SharedViewModel) {
 
     val modules = listOf(
         ModuleItem("Animais",R.drawable.cao),
@@ -113,6 +121,10 @@ fun MyScreen(navController: NavHostController) {
         ModuleItem("Veículos", R.drawable.engarrafamento),
         ModuleItem("Cozinha", R.drawable.hamburguer)
     )
+
+    LaunchedEffect(Unit) {
+        sharedViewModel.modules = modules
+    }
 
 
     Scaffold(
@@ -195,7 +207,7 @@ fun MyScreen(navController: NavHostController) {
                         }) {
                             Icon(
                                 imageVector = Icons.Default.Forum,
-                                contentDescription = "Configurações"
+                                contentDescription = "Prática"
                             )
                         }
 
@@ -223,11 +235,11 @@ fun MyScreen(navController: NavHostController) {
 }
 
 
-
 data class ModuleItem(
     val title: String,
     val imageResId: Int
 )
+
 @Composable
 fun ModulesGrid(modules: List<ModuleItem>, navController: NavController){
     LazyVerticalGrid(

@@ -42,7 +42,9 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
     implementation(libs.androidx.activity.compose)
+    implementation("androidx.compose.foundation:foundation-layout-android:1.5.1")
     debugImplementation(libs.compose.ui.tooling)
     implementation (libs.androidx.material.icons.extended)
     implementation(libs.androidx.navigation.compose)
+    implementation (libs.androidx.lifecycle.viewmodel.compose)
 }
