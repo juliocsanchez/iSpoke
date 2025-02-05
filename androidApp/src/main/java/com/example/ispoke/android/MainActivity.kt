@@ -1,6 +1,7 @@
 package com.example.ispoke.android
 
 import Practice
+import Profile
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.activity.ComponentActivity
@@ -103,6 +104,20 @@ class MainActivity : ComponentActivity() {
                             navController = navController,
                             gestureName = backStackEntry.arguments?.getString("gestureName") ?: ""
                             )
+                    }
+                    composable(
+                        route = "profile"
+                    ){
+                        Profile(
+                            navController = navController
+                        )
+                    }
+                    composable(
+                        route = "login"
+                    ){
+                        Profile(
+                            navController = navController
+                        )
                     }
                 }
             }
@@ -214,7 +229,7 @@ fun MyScreen(navController: NavHostController, sharedViewModel: SharedViewModel)
                         }
 
                         // Ícone 3
-                        IconButton(onClick = { /* Ir pnavControllerara Perfil*/  }) {
+                        IconButton(onClick = { navController.navigate("profile") }) {
                             Icon(
                                 imageVector = Icons.Default.Person,
                                 contentDescription = "Perfil"
