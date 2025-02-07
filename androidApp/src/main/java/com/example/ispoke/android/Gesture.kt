@@ -172,9 +172,7 @@ fun Gesture(navController: NavController, letter: String,imageResId : Int, title
                             android.Manifest.permission.CAMERA
                         ) == PackageManager.PERMISSION_GRANTED -> {
                             try {
-                                // Codifica o título para URL
-                                val encodedTitle = URLEncoder.encode(letter, "UTF-8")
-                                navController.navigate("practice/$encodedTitle")
+                                navController.navigate("practice")
                             } catch (e: Exception) {
                                 Log.e("Navigation", "Erro na navegação", e)
                             }
