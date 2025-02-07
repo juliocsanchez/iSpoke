@@ -1,6 +1,6 @@
 package com.example.ispoke.android
 
-import Practice
+import Login
 import Profile
 import android.os.Bundle
 import android.os.Parcelable
@@ -54,6 +54,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.signlanguage.Practice
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,13 +98,11 @@ class MainActivity : ComponentActivity() {
                             letter = backStackEntry.arguments?.getString("letter") ?: "")
                     }
                     composable(
-                        route = "practice/{gestureName}",
-                        arguments = listOf(navArgument("gestureName") { type = NavType.StringType })
-                    ) {backStackEntry ->
+                        route = "practice"
+                    ){
                         Practice(
-                            navController = navController,
-                            gestureName = backStackEntry.arguments?.getString("gestureName") ?: ""
-                            )
+                            navController = navController
+                        )
                     }
                     composable(
                         route = "profile"
@@ -115,7 +114,14 @@ class MainActivity : ComponentActivity() {
                     composable(
                         route = "login"
                     ){
-                        Profile(
+                        Login(
+                            navController = navController
+                        )
+                    }
+                    composable(
+                        route = "register"
+                    ){
+                        Register(
                             navController = navController
                         )
                     }
@@ -178,7 +184,7 @@ fun MyScreen(navController: NavHostController, sharedViewModel: SharedViewModel)
                         Spacer(modifier = Modifier.weight(1f))
 
 
-                        IconButton(onClick = { /*  Ir para perfil */ },
+                        IconButton(onClick = { navController.navigate("profile") },
 
                         ) {
                             Icon(
