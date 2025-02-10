@@ -1,3 +1,4 @@
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
@@ -16,6 +17,7 @@ android {
     }
     buildFeatures {
         compose = true
+        mlModelBinding = true
     }
     packaging {
         resources {
@@ -46,13 +48,12 @@ dependencies {
     implementation (libs.androidx.camera.camera2)
     implementation (libs.androidx.camera.lifecycle)
     implementation (libs.androidx.camera.view)
-    implementation("com.google.ai.edge.litert:litert-support-api:1.1.0")
-    implementation("com.google.ai.edge.litert:litert-metadata:1.1.0")
-    implementation("com.google.ai.edge.litert:litert:1.1.0")
-    implementation("com.google.ai.edge.litert:litert-gpu:1.1.0")
+    implementation(libs.androidx.core)
     debugImplementation(libs.compose.ui.tooling)
     implementation (libs.androidx.material.icons.extended)
     implementation(libs.androidx.navigation.compose)
     implementation (libs.androidx.lifecycle.viewmodel.compose)
+    implementation (libs.tensorflow.lite.task.vision)
+    implementation (libs.tensorflow.lite.metadata.v044)
     implementation(libs.coil.compose)
 }
