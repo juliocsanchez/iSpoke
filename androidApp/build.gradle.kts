@@ -50,6 +50,7 @@ dependencies {
     implementation (libs.androidx.camera.view)
     implementation(libs.androidx.core)
     debugImplementation(libs.compose.ui.tooling)
+    implementation ("org.tensorflow:tensorflow-lite:2.11.0")
     implementation (libs.androidx.material.icons.extended)
     implementation(libs.androidx.navigation.compose)
     implementation (libs.androidx.lifecycle.viewmodel.compose)
