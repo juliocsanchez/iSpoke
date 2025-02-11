@@ -23,7 +23,7 @@ fun Routes() {
 
     NavHost(
         navController = navController,
-        startDestination = "home"
+        startDestination = "login"
     ) {
         composable("home") {
             Home(navController, sharedViewModel)

@@ -1,5 +1,6 @@
 package com.example.ispoke.android.localComposables
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,12 +20,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.ispoke.android.R
 import com.example.ispoke.android.utils.getDrawableID
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun ImageGesture(letter: String) {
     val letterToLowerCase = letter.lowercase()

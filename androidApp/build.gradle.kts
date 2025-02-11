@@ -49,6 +49,7 @@ dependencies {
     implementation (libs.androidx.camera.lifecycle)
     implementation (libs.androidx.camera.view)
     implementation(libs.androidx.core)
+    implementation("androidx.core:core-splashscreen:1.0.1")
     debugImplementation(libs.compose.ui.tooling)
     implementation ("org.tensorflow:tensorflow-lite:2.11.0")
     implementation (libs.androidx.material.icons.extended)

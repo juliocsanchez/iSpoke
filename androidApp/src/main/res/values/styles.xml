@@ -1,3 +1,6 @@
 <resources>
-    <style name="AppTheme" parent="android:Theme.Material.NoActionBar"/>
+    <style name="iSpoke" parent="android:Theme.Material.NoActionBar"/>
+    <style name="Theme.iSpoke.Splash" parent="@style/Theme.AppCompat">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
 </resources>
