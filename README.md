@@ -44,6 +44,9 @@ Ao iniciar o aplicativo, você encontrará as seguintes telas:
 - Módulos de Aprendizado: ao selecionar um módulo (como o do alfabeto), o usuário pode visualizar os gestos correspondentes a cada letra e acessar a tela de prática.
 - Tela de Prática: ao clicar no botão de praticar, a câmera é ativada para capturar o gesto do usuário. Se o gesto for reconhecido corretamente, ele é contabilizado como um gesto aprendido. O usuário pode repetir a prática ou escolher outro gesto.
 -  Tela de Perfil: armazena e exibe informações do usuário e seu nível de aprendizado.
+
+## BackEnd 
+https://github.com/marcosscaio/iSpokeBack-end.git
   
   ## Arquitetura
 O projeto foi estruturado utilizando o padrão MVC:
