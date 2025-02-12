@@ -47,7 +47,7 @@ fun Gesture(navController: NavController, letter: String,imageResId : Int, title
                             android.Manifest.permission.CAMERA
                         ) == PackageManager.PERMISSION_GRANTED -> {
                             try {
-                                navController.navigate("practice")
+                                navController.navigate("practice/$letter")
                             } catch (e: Exception) {
                                 Log.e("Navigation", "Erro na navegação", e)
                             }

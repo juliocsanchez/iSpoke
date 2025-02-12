@@ -1,5 +1,6 @@
 package com.example.ispoke.android.navigation
 
+import Practice
 import SharedViewModel
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -8,7 +9,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import view.Practice
 import view.Register
 import view.Gesture
 import view.Home
@@ -56,8 +56,14 @@ fun Routes() {
                 letter = backStackEntry.arguments?.getString("letter") ?: ""
             )
         }
-        composable("practice") {
-            Practice(navController)
+        composable(
+            route = "practice/{letter}",
+            arguments = listOf(
+                navArgument("letter") { type = NavType.StringType },
+            )
+        ) {
+            backStackEntry ->
+            Practice(navController = navController, letter = backStackEntry.arguments?.getString("letter") ?: "" )
         }
         composable("profile") {
             Profile(navController)
