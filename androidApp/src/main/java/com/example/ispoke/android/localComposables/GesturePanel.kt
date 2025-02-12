@@ -25,10 +25,12 @@ import com.example.ispoke.android.R
 import com.example.ispoke.android.classes.ModuleItem
 
 @Composable
-fun GesturePanel(modifier: Modifier = Modifier,
-                 modules: List<ModuleItem>,
-                 navController: NavController
-){
+fun GesturePanel(
+    modifier: Modifier = Modifier,
+    modules: List<ModuleItem>,
+    navController: NavController,
+    gestureCheck: Int
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -53,7 +55,7 @@ fun GesturePanel(modifier: Modifier = Modifier,
                 Spacer(modifier = Modifier.width(16.dp))
                 Column {
                     Text(
-                        text = "0",
+                        text = gestureCheck.toString(), // Exibe o contador atualizado
                         style = MaterialTheme.typography.headlineSmall,
                         fontSize = 80.sp
                     )

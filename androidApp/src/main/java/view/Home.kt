@@ -9,12 +9,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import com.example.ispoke.android.classes.GestureCheck
 import com.example.ispoke.android.localComposables.BottomBar
 import com.example.ispoke.android.localComposables.GesturePanel
 import modules
 
 @Composable
-fun Home(navController: NavHostController, sharedViewModel: SharedViewModel) {
+fun Home(navController: NavHostController, sharedViewModel: SharedViewModel, gestureCheck: GestureCheck) {
     LaunchedEffect(Unit) {
         sharedViewModel.modules = modules
     }
@@ -28,7 +29,8 @@ fun Home(navController: NavHostController, sharedViewModel: SharedViewModel) {
                 .fillMaxSize()
                 .padding(paddingValues),
             modules = modules,
-            navController = navController
+            navController = navController,
+            gestureCheck = gestureCheck.gestureCount
         )
     }
 }

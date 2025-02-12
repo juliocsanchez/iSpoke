@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.ispoke.android.classes.GestureCheck
 import view.Register
 import view.Gesture
 import view.Home
@@ -20,13 +21,15 @@ import view.Profile
 fun Routes() {
     val navController = rememberNavController()
     val sharedViewModel: SharedViewModel = viewModel()
+    val gestureCheck: GestureCheck = viewModel()
+
 
     NavHost(
         navController = navController,
         startDestination = "login"
     ) {
         composable("home") {
-            Home(navController, sharedViewModel)
+            Home(navController, sharedViewModel, gestureCheck )
         }
         composable(
             route = "module/{title}/{imageResId}",

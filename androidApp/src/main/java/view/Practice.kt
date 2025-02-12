@@ -22,7 +22,9 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.ispoke.android.classes.GestureCheck
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -54,6 +56,7 @@ fun showColoredToast(context: android.content.Context, message: String, backgrou
 fun Practice(navController: NavController, letter: String) {
     val context = LocalContext.current
     var capturedImage by remember { mutableStateOf<Bitmap?>(null) }
+    val gestureCheck: GestureCheck = viewModel()
     val coroutineScope = rememberCoroutineScope()
 
     // Launcher para solicitar a permissão da câmera
@@ -131,24 +134,21 @@ fun Practice(navController: NavController, letter: String) {
                 onClick = {
                     coroutineScope.launch(Dispatchers.IO) {
                         capturedImage?.let { bitmap ->
-                            // Converter o Bitmap para um array de bytes (formato JPEG)
+                            // Converter o Bitmap para array de bytes (JPEG ou PNG)
                             val stream = ByteArrayOutputStream()
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
                             val byteArray = stream.toByteArray()
 
-                            // Preparar a requisição multipart para enviar imagem e a letra
                             val client = OkHttpClient()
                             val requestBody = MultipartBody.Builder()
                                 .setType(MultipartBody.FORM)
                                 .addFormDataPart("letra", letter)
                                 .addFormDataPart(
                                     "file",
-                                    "photo.png",
-                                    byteArray.toRequestBody("image/png".toMediaTypeOrNull())
+                                    "photo.jpg",
+                                    byteArray.toRequestBody("image/jpeg".toMediaTypeOrNull())
                                 )
                                 .build()
-
-                            print(letter)
 
                             val request = Request.Builder()
                                 .url("http://192.168.0.8:8000/detect")
@@ -163,6 +163,7 @@ fun Practice(navController: NavController, letter: String) {
                                     val detectionFound = jsonObj.getBoolean("detection_found")
                                     withContext(Dispatchers.Main) {
                                         if (detectionFound) {
+                                            gestureCheck.addGesture(letter)
                                             showColoredToast(
                                                 context,
                                                 "Detecção correta!",
